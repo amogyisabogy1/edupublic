@@ -1,0 +1,61 @@
+{% extends "edunet/layout.html" %}
+
+{% block body %}
+
+        {% if message %}
+            <div class="alert alert-danger">{{ message }}</div>
+        {% endif %}
+
+        <!-- Jumbotron -->
+        <div class="jumbotron text-center lighten-4">
+
+            <!-- Title -->
+            <br><h1><strong>CREATE A upload</strong></h1> <br> <br>
+            <br>
+            <img src="../../static/auctions/img/forcreate.svg" alt="indeximage" style="height: 350px;" class="embed-responsive">
+            <br> <br> <br>
+            <!-- <hr class="my-4 pb-2"> -->
+    
+            <!-- Grid row -->
+            <div class="text-left">
+    
+                <form action="{% url 'createlisting' %}" method="POST" enctype = "multipart/form-data">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <input class="form-control" autofocus type="text" name="title" placeholder="Title">
+                    </div>
+                    <div class="form-group">
+                        <textarea class="form-control" name="description" rows="4" placeholder="Description"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <select class="form-control" name="category" placeholder="Category" required>
+                            <option value="">Choose a Category</option>
+                            <option value="fashion">Notes</option>
+                            <option value="tools">Books</option>
+                            <option value="toys">Assignments</option>
+                        </select>
+                    </div>
+
+                     <div class="form-group">
+                        <input class="form-control" type="text" name="class" placeholder="Choose a class(Optional)">
+                    </div>
+                    
+                    <div class="form-group">
+                        <input class="form-control" type="text" name="Grade" placeholder="Grade">
+                    </div>
+                 
+                    <div class="form-group">
+                        <input class="form-control" type="text" name="image_link" placeholder="Image Link (Optional)">
+                    </div>
+                    <div class="form-group">
+                        <input class="form-control" type="file"  name="file"  placeholder = "file">
+                    </div>
+
+                    
+                    <input class="btn btn-primary" type="submit" value="Create">
+                </form>
+            </div>
+        </div>
+        <!-- End Jumbotron -->
+
+{% endblock %}
