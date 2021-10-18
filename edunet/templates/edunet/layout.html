@@ -15,7 +15,7 @@
         <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet">
         <!-- Material Design Bootstrap -->
         <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/css/mdb.min.css" rel="stylesheet">
-        <!-- Link to static files  -->
+
         <link href="{% static 'edunet/styles.css' %}" rel="stylesheet">
     </head>
 
@@ -48,11 +48,6 @@
                         <li class="nav-item">
                             <a class="nav-link" href="{% url 'createlisting' %}">Create Listing</a>
                         </li>
-
-                        <li class="nav-item">
-                            <a class="nav-link" href="{% url 'categories' %}">Categories</a>
-                        </li>
-
                     {% endif %}
 
                 </ul>
@@ -63,7 +58,7 @@
                         {% if user.is_authenticated %}
 
                             <li class="nav-item">
-                                <a class="nav-link" href="{% url 'dashboard' %}">Dashboard</a>
+                                <a class="nav-link" href="{% url 'dashboard' request.user.username %}">My profile</a>
                             </li>
 
                             <li class="nav-item">

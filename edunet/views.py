@@ -7,6 +7,7 @@ import datetime
 from annoying.functions import get_object_or_None
 from django.contrib.auth.decorators import login_required
 
+
 from .models import *
 
 
@@ -84,12 +85,11 @@ def register(request):
 
 # view for dashboard
 @login_required(login_url='/login')
-def dashboard(request):
-    winners = Winner.objects.filter(winner=request.user.username)
-    # checking for watchlist
-    lst = Watchlist.objects.filter(user=request.user.username)
-    # list of products available in WinnerModel
+def dashboard(request, profile):
+    lst = Watchlist.objects.filter(user=profile)
+    uploads = Listing.objects.filter(seller = profile)
     present = False
+    products = False
     prodlst = []
     i = 0
     if lst:
@@ -97,11 +97,14 @@ def dashboard(request):
         for item in lst:
             product = Listing.objects.get(id=item.listingid)
             prodlst.append(product)
+    if uploads:
+        present = True
     print(prodlst)
     return render(request, "edunet/dashboard.html", {
         "product_list": prodlst,
         "present": present,
-        "products": winners
+        "products": uploads,
+        "profile":profile
     })
 
 
@@ -211,6 +214,7 @@ def viewlisting(request, product_id):
             "added": added,
             "comments": comments
         })
+
 
 
 # View to add or remove products to watchlists
